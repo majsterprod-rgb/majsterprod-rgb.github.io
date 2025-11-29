@@ -4,6 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI Agents — Premium AI Voice Agents</title>
+
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Inter:wght@300;400;600;800&family=Montserrat:wght@300;400;600;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #ffffff;
@@ -42,6 +46,13 @@
 
     /* DARK MODE */
     body.dark { --bg:#000; --text:#fff; --accent:#fff; --border:#333; }
+
+    /* FONT PREVIEW */
+    #font-preview { max-width:1100px; margin:0 auto; padding:60px 20px; text-align:center; }
+    #font-preview h2 { font-size:40px; font-weight:800; margin-bottom:20px; }
+    .font-showcase { margin-top:30px; }
+    .font-card { border:1px solid var(--border); border-radius:20px; padding:24px; margin:18px 0; font-size:28px; background:#fafafa; transition:0.25s ease; }
+    .font-card:hover { transform:scale(1.02); box-shadow:0 6px 20px rgba(0,0,0,0.08); background:white; }
   </style>
 </head>
 <body>
@@ -55,7 +66,7 @@
 </nav>
 
 <header class="hero">
-  <h1>Super‑realistic <br><span>AI Voice Agent</span></h1>
+  <h1>Super-realistic <br><span>AI Voice Agent</span></h1>
   <p>It answers, speaks, sells, and handles conversations in real time — more naturally than a human.</p>
   <div>
     <a href="#ai-agent" class="btn btn-primary">Try the demo</a>
@@ -65,6 +76,37 @@
     <source src="YOUR_VIDEO.mp4" type="video/mp4">
   </video>
 </header>
+
+<!-- FONT PREVIEW SECTION -->
+<section id="font-preview">
+  <h2>Font Preview</h2>
+
+  <label style="font-size:18px; font-weight:600; margin-bottom:20px; display:block;">
+    Choose site font:
+  </label>
+
+  <select id="fontSelector" style="padding:14px; border-radius:12px; border:1px solid var(--border); font-size:18px;">
+    <option value="Inter">Inter</option>
+    <option value="Poppins">Poppins</option>
+    <option value="Montserrat">Montserrat</option>
+    <option value="Roboto">Roboto</option>
+  </select>
+
+  <div class="font-showcase">
+    <div class="font-card" style="font-family: Inter;">
+      Inter — The quick brown fox jumps over the lazy dog.
+    </div>
+    <div class="font-card" style="font-family: Poppins;">
+      Poppins — The quick brown fox jumps over the lazy dog.
+    </div>
+    <div class="font-card" style="font-family: Montserrat;">
+      Montserrat — The quick brown fox jumps over the lazy dog.
+    </div>
+    <div class="font-card" style="font-family: Roboto;">
+      Roboto — The quick brown fox jumps over the lazy dog.
+    </div>
+  </div>
+</section>
 
 <section id="ai-agent">
   <h2>Test the AI Agent</h2>
@@ -101,6 +143,11 @@ async function sendMessage(){
     document.querySelectorAll('.bubble.ai').pop().textContent = "Connect backend to GPT API for real replies.";
   },800);
 }
+
+// FONT SWITCHER
+ocument.getElementById("fontSelector").addEventListener("change", function() {
+  document.body.style.fontFamily = this.value + ", sans-serif";
+});
 </script>
 
 </body>
