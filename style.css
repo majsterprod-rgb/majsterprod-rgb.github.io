@@ -1,16 +1,238 @@
-:root{
-  --bg:#f7f9fc; --card:#ffffff; --accent:#0ea5ff; --text:#071024; --muted:#6b7280;
-  --radius:12px; --container:1100px;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,Arial,Helvetica;background:var(--bg);color:var(--text)}
-.container{max-width:var(--container);margin:28px auto;padding:0 20px}
-.site-header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:linear-gradient(90deg,#071024,#12345a);color:#fff;border-radius:0 0 14px 14px}
-.logo{height:46px}
-.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
-.card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 8px 28px rgba(2,6,23,0.06);margin-bottom:18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.pricing{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-.price-card{padding:18px;border-radius:12px;text-align:center;border:1px solid #e6eef9}
-footer{background:#071024;color:#fff;padding:18px;text-align:center;margin-top:20px}
-@media (max-width:720px){ .container{padding:12px} .site-header{flex-direction:column;gap:12px} }
+<!--
+Black & White single-file HTML template
+Designed to imitate the clear, modern layout like getzowie.com but in monochrome.
+Drop this file as your repository's index.html (replace current) and push to GitHub Pages.
+Notes:
+ - Uses system fonts for fast loading. Replace with Google Fonts if you want.
+ - All colors are black/white/gray using CSS variables for easy tuning.
+ - Mobile-first, responsive layout. Simple JS toggles mobile menu and smooth scroll.
+ - Accessibility: focus styles, sufficient contrast, readable sizes.
+-->
+
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MajsterProd — Agenci AI</title>
+  <meta name="description" content="Profesjonalni agenci AI dla firm — prosty kontakt, przejrzyste ceny." />
+
+  <!-- Styles -->
+  <style>
+    :root{
+      --bg: #ffffff; /* white */
+      --fg: #0a0a0a; /* near-black */
+      --muted: #777777; /* gray for secondary text */
+      --accent: #000000; /* primary CTA color (black) */
+      --card-border: #e6e6e6;
+      --radius: 14px;
+      --maxwidth: 1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .container{width:92%;max-width:var(--maxwidth);margin:0 auto}
+
+    /* Header */
+    header{padding:20px 0;}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{font-weight:700;letter-spacing:0.2px}
+    .nav-links{display:flex;gap:14px;align-items:center}
+    .nav-links a{padding:8px 12px;border-radius:10px}
+
+    /* Mobile menu */
+    .menu-btn{display:none;border:1px solid transparent;padding:8px;border-radius:10px;background:transparent}
+
+    /* Hero */
+    .hero{padding:36px 0 10px}
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:26px;align-items:center}
+    .eyebrow{font-size:14px;color:var(--muted);font-weight:600}
+    h1{font-size:28px;margin:6px 0 12px;line-height:1.05}
+    p.lead{color:var(--muted);margin:0 0 16px}
+
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;border:2px solid var(--accent);cursor:pointer}
+    .btn-primary{background:var(--fg);color:var(--bg);}
+    .btn-ghost{background:transparent;color:var(--fg);}
+    .btn:focus{outline:3px solid rgba(0,0,0,0.08);outline-offset:2px}
+    .btn:hover{transform:translateY(-3px)}
+
+    /* Cards */
+    .features{display:grid;grid-template-columns:repeat(1,1fr);gap:14px;margin-top:22px}
+    .card{border:1px solid var(--card-border);padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));}
+    .card h3{margin:0 0 8px}
+    .muted{color:var(--muted)}
+
+    /* Pricing */
+    .pricing{display:grid;grid-template-columns:1fr;gap:12px;margin:28px 0}
+    .price-card{padding:18px;border-radius:12px;border:1px solid var(--card-border)}
+    .price{font-size:22px;font-weight:800}
+
+    /* Footer */
+    footer{padding:28px 0;color:var(--muted);font-size:14px}
+
+    /* Layout tweaks for larger screens */
+    @media(min-width:760px){
+      .hero-grid{grid-template-columns:1fr 460px}
+      h1{font-size:40px}
+      .features{grid-template-columns:repeat(2,1fr)}
+      .pricing{grid-template-columns:repeat(3,1fr)}
+      .menu-btn{display:none}
+    }
+
+    /* Mobile nav adjustments */
+    @media(max-width:759px){
+      .nav-links{display:none}
+      .menu-btn{display:inline-flex}
+      .mobile-nav{display:none}
+      .mobile-nav.open{display:block;padding:12px 0}
+      .menu-btn:focus{outline:3px solid rgba(0,0,0,0.08);}
+    }
+
+    /* Small UI polish */
+    .kicker{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--card-border);font-weight:700}
+    .logo-mark{width:38px;height:38px;border-radius:8px;border:1px solid var(--card-border);display:inline-grid;place-items:center;font-weight:800}
+
+  </style>
+</head>
+<body>
+
+  <header class="container">
+    <nav class="nav" aria-label="Główna nawigacja">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div class="logo-mark">MP</div>
+        <div class="brand">MajsterProd</div>
+      </div>
+
+      <div class="nav-links" role="navigation" aria-label="linki">
+        <a href="#features">Funkcje</a>
+        <a href="#pricing">Cennik</a>
+        <a href="#contact" class="btn btn-ghost">Kontakt</a>
+        <a href="#" class="btn btn-primary">Zamów</a>
+      </div>
+
+      <button class="menu-btn" id="menuToggle" aria-expanded="false" aria-controls="mobileNav">☰</button>
+    </nav>
+
+    <div id="mobileNav" class="mobile-nav" hidden>
+      <div style="display:flex;flex-direction:column;gap:8px;padding-top:8px">
+        <a href="#features">Funkcje</a>
+        <a href="#pricing">Cennik</a>
+        <a href="#contact">Kontakt</a>
+        <a href="#" class="btn btn-primary">Zamów</a>
+      </div>
+    </div>
+
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Profesjonalne rozwiązania</div>
+          <h1>Agenci AI dla biznesu — szybciej, taniej, prościej.</h1>
+          <p class="lead">Zintegrujemy inteligentne agenty, które usprawnią obsługę klienta i automatyzację procesów. Bez zbędnego komplikowania — my robimy technologię prostą w użyciu.</p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact">Umów demo</a>
+            <a class="btn btn-ghost" href="#pricing">Zobacz cennik</a>
+          </div>
+
+          <div class="features" id="features">
+            <div class="card">
+              <h3>Obsługa 24/7</h3>
+              <p class="muted">Natychmiastowe odpowiedzi i automatyczne eskalacje dla złożonych spraw.</p>
+            </div>
+            <div class="card">
+              <h3>Integracje</h3>
+              <p class="muted">Połączymy Twoje systemy: CRM, Slack, e‑mail, bazę wiedzy.</p>
+            </div>
+            <div class="card">
+              <h3>Bezpieczeństwo</h3>
+              <p class="muted">Dostępne role, logi i ochrona danych na poziomie biznesowym.</p>
+            </div>
+            <div class="card">
+              <h3>Rozwój</h3>
+              <p class="muted">Agenty uczą się kontekstu Twojej branży, poprawiając efektywność.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <aside style="padding:18px;border-radius:12px;border:1px solid var(--card-border);height:100%;align-self:start">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="kicker">Najpopularniejsze</div>
+                <div style="font-weight:800;font-size:18px;margin-top:8px">Start — 3 agenty</div>
+                <div class="muted">Zaczynasz z podstawowymi integracjami i supportem.</div>
+              </div>
+              <div style="text-align:right">
+                <div class="price">499 zł</div>
+                <div class="muted">/ miesiąc</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a href="#contact" class="btn btn-primary">Skontaktuj się</a>
+              <a href="#pricing" class="btn btn-ghost">Zobacz wszystkie</a>
+            </div>
+
+            <div style="border-top:1px solid var(--card-border);padding-top:10px">
+              <strong>Korzyści:</strong>
+              <ul style="margin:8px 0 0 18px;color:var(--muted)">
+                <li>Integracja 2 tygodnie</li>
+                <li>Wsparcie 24/7</li>
+                <li>Bezpieczne przechowywanie danych</li>
+              </ul>
+            </div>
+
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+      <div class="price-card">
+        <h3>Start</h3>
+        <div class="price">499 zł</div>
+        <p class="muted">Do 3 agentów, podstawowe integracje.</p>
+        <div style="margin-top:12px"><a class="btn btn-primary" href="#contact">Wybierz</a></div>
+      </div>
+
+      <div class="price-card">
+        <h3>Biznes</h3>
+        <div class="price">1299 zł</div>
+        <p class="muted">Do 10 agentów, SLA, zaawansowane integracje.</p>
+        <div style="margin-top:12px"><a class="btn btn-primary" href="#contact">Wybierz</a></div>
+      </div>
+
+      <div class="price-card">
+        <h3>Enterprise</h3>
+        <div class="price">Oferta</div>
+        <p class="muted">Pełne wsparcie, dedykowany zespół, integracje na zamówienie.</p>
+        <div style="margin-top:12px"><a class="btn btn-primary" href="#contact">Kontakt</a></div>
+      </div>
+    </section>
+
+    <section id="contact" style="padding:18px 0 60px">
+      <div style="display:grid;grid-template-columns:1fr;gap:14px;align-items:start">
+        <div>
+          <h2>Kontakt</h2>
+          <p class="muted">Napisz do nas — odpowiadamy zwykle w ciągu 24 godzin.</p>
+
+          <form id="contactForm" style="display:flex;flex-direction:column;gap:10px;max-width:520px">
+            <input name="name" placeholder="Imię i nazwisko" required style="padding:12px;border-radius:
