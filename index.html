@@ -167,20 +167,43 @@
       overflow: hidden;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      background: #fff;
-      margin-top: 40px;
+      background: linear-gradient(90deg, #ffffff 0%, #f2f2f2 50%, #ffffff 100%);
+      margin-top: 10px;
+      position: relative;
+    }
+
+    .ticker::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.04), transparent 70%);
+      pointer-events: none;
+    }
     }
     .ticker-track {
       white-space: nowrap;
       display: inline-block;
-      padding: 16px 0;
-      font-size: 28px;
-      font-weight: 700;
+      padding: 20px 0;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #000, #555, #000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       animation: tickerMove 18s linear infinite;
     }
     @keyframes tickerMove {
       from { transform: translateX(0); }
       to { transform: translateX(-50%); }
+    }
+
+  /* DARK MODE */
+    body.dark {
+      --bg: #000000;
+      --text: #ffffff;
+      --accent: #ffffff;
+      --border: #333333;
+      transition: background 0.3s, color 0.3s;
     }
 
 </style>
@@ -198,20 +221,29 @@
     </div>
   </nav>
 
+  <!-- COLOR MODE TOGGLE BUTTON -->
+  <button id="toggleMode" style="position: fixed; bottom: 20px; right: 20px; z-index: 2000; padding: 12px 20px; border-radius: 14px; border: 2px solid #000; background:#fff; cursor:pointer; font-weight:bold;">🌙</button>
+
+  <!-- TICKER MOVED UP -->
+  <div class="ticker">
+    <div class="ticker-track">
+      AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS •
+    </div>
+  </div>
+
   <!-- HERO SECTION -->
   <header class="hero">
     <div class="hero-content">
       <h1>
-        Super‑realistyczny<br />
-        <span class="accent">Agent Głosowy AI</span>
+        Super‑realistic<br />
+        <span class="accent">AI Voice Agent</span>
       </h1>
       <p>
-        Odbiera, mówi, sprzedaje i prowadzi rozmowy w czasie rzeczywistym —
-        naturalniej niż człowiek.
+        It answers, speaks, sells, and handles conversations in real time — more naturally than a human.
       </p>
       <div class="hero-buttons">
-        <a href="#demo" class="btn btn-primary">Wypróbuj demo</a>
-        <a href="#features" class="btn">Zobacz funkcje</a>
+        <a href="#demo" class="btn btn-primary">Try the demo</a>
+        <a href="#features" class="btn">See features</a>
       </div>
     </div>
 
@@ -225,35 +257,31 @@
   </header>
 
   <!-- FEATURES -->
-  <!-- TICKER MOVED HERE -->
-  <div class="ticker">
-    <div class="ticker-track">
-      AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS •
-    </div>
+  
   </div>
 
   <section id="features">
-    <h2>Kluczowe funkcje</h2>
+    <h2>Key Features</h2>
 
     <div class="grid">
       <div class="card">
-        <h3>Naturalna rozmowa</h3>
-        <p>Agent AI mówi i rozumie jak człowiek — bez opóźnień.</p>
+        <h3>Natural conversation</h3>
+        <p>The AI agent talks and understands like a human — with no delays.</p>
       </div>
 
       <div class="card">
-        <h3>Obsługa połączeń</h3>
-        <p>Może odbierać telefony, odpowiadać i przełączać klientów.</p>
+        <h3>Call handling</h3>
+        <p>It can answer calls, respond, and transfer customers.</p>
       </div>
 
       <div class="card">
-        <h3>Integracje API</h3>
-        <p>Łączy się z Twoimi systemami i pobiera dane w locie.</p>
+        <h3>API Integrations</h3>
+        <p>Connects to your systems and fetches data on the fly.</p>
       </div>
 
       <div class="card">
-        <h3>Automatyczne odpowiedzi</h3>
-        <p>Natychmiastowe odpowiedzi oparte na Twojej bazie wiedzy.</p>
+        <h3>Automated responses</h3>
+        <p>Instant responses based on your knowledge base.</p>
       </div>
     </div>
   </section>
@@ -272,29 +300,29 @@
 
     <div class="faq-item">
       <details>
-        <summary>Jak działa agent AI?</summary>
-        <p>Analizuje Twoje dane i odpowiada w czasie rzeczywistym.</p>
+        <summary>How does the AI agent work?</summary>
+        <p>It analyzes your data and responds in real time.</p>
       </details>
     </div>
 
     <div class="faq-item">
       <details>
-        <summary>Czy mogę podpiąć własny numer?</summary>
-        <p>Tak — pełna integracja z telefonią VoIP.</p>
+        <summary>Can I connect my own number?</summary>
+        <p>Yes — full integration with VoIP.</p>
       </details>
     </div>
 
     <div class="faq-item">
       <details>
-        <summary>Czy agent może prowadzić sprzedaż?</summary>
-        <p>Tak, może kwalifikować leady i przekierowywać klientów.</p>
+        <summary>Can the agent handle sales?</summary>
+        <p>Yes, it can qualify leads and redirect customers.</p>
       </details>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    © 2025 AI Agents — Wszelkie prawa zastrzeżone
+    © 2025 AI Agents — All rights reserved
   </footer>
 
   <!-- JS -->
@@ -307,7 +335,14 @@
         out.innerHTML = "👋 Cześć! Jestem Twoim agentem AI. Jak mogę pomóc?";
       }, 1200);
     }
-  </script>
+    const btn=document.getElementById("toggleMode");
+    btn.addEventListener("click", () => {
+      const dark = document.body.classList.toggle("dark");
+      btn.textContent = dark ? "☀️" : "🌙";
+    });("click", () => {
+      document.body.classList.toggle("dark");
+    });
+</script>
 
 </body>
 </html>
