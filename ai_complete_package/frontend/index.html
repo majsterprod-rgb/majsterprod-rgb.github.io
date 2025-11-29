@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI Agents — Tworzenie agentów AI dla firm</title>
+  <meta name="description" content="Tworzymy zaawansowane agenty AI: chat, automatyzacje, integracje CRM, voice assistants.">
+  <meta name="keywords" content="AI, agent AI, chatbot, automatyzacja, CRM, integracje">
+  <!-- Open Graph -->
+  <meta property="og:title" content="AI Agents — Agenci AI dla firm">
+  <meta property="og:description" content="Tworzymy zaawansowane agenty AI: chat, automatyzacje, integracje CRM, voice assistants.">
+  <meta property="og:image" content="logo.svg">
+  <link rel="icon" href="logo.svg">
+  <link rel="stylesheet" href="style.css">
+  <!-- Analytics (replace with your GA ID) -->
+  <script>
+    // Google Analytics placeholder - replace MEASUREMENT_ID
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    // gtag('config', 'MEASUREMENT_ID');
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap">
+      <img src="logo.svg" alt="AI Agents logo" class="logo">
+      <div>
+        <h1>AI Agents</h1>
+        <p class="tag">Profesjonalne agenty AI dla firm</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="themeToggle" class="btn small">🌙</button>
+      <a href="#kontakt" class="btn">Kontakt</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero card">
+      <h2>Budujemy inteligentnych asystentów AI, którzy naprawdę pracują</h2>
+      <p class="muted">Automatyzacja procesów, obsługa klienta, integracje z systemami.</p>
+      <div class="cta-row">
+        <button class="btn" id="orderBtn">Zamów wycenę</button>
+        <a class="btn ghost" href="#cennik">Zobacz cennik</a>
+      </div>
+    </section>
+
+    <section id="uslugi" class="card grid">
+      <article>
+        <h3>Agent obsługi klienta</h3>
+        <p>24/7 odpowiada na pytania, zapisuje zgłoszenia, kieruje do konsultantów.</p>
+      </article>
+      <article>
+        <h3>Agent sprzedażowy</h3>
+        <p>Generuje leady, prowadzi rozmowy, podpowiada produkty.</p>
+      </article>
+      <article>
+        <h3>Integracje i automatyzacje</h3>
+        <p>Łączenie CRM, e-maili, systemów wewnętrznych, automatyczne zadania.</p>
+      </article>
+      <article>
+        <h3>Voice & multimodal</h3>
+        <p>Wsparcie głosowe, transkrypcje, obsługa rozmów telefonicznych.</p>
+      </article>
+    </section>
+
+    <section id="cennik" class="card pricing">
+      <div class="price-card">
+        <h4>Start</h4>
+        <p>FAQ chat + instalacja</p>
+        <div class="price">499 zł</div>
+      </div>
+      <div class="price-card">
+        <h4>Business</h4>
+        <p>Agent sprzedażowy + CRM</p>
+        <div class="price">1499 zł</div>
+      </div>
+      <div class="price-card">
+        <h4>Enterprise</h4>
+        <p>Custom agent, SLA, integracje</p>
+        <div class="price">od 4999 zł</div>
+      </div>
+    </section>
+
+    <section id="kalkulator" class="card">
+      <h3>Szybki kalkulator</h3>
+      <div class="calc">
+        <label>Poziom złożoności
+          <select id="complexity"><option value="1">Niski</option><option value="1.8">Średni</option><option value="2.8">Wysoki</option></select>
+        </label>
+        <label>Ilość integracji
+          <select id="integrations"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3+</option></select>
+        </label>
+        <label>Kanały
+          <select id="channels"><option value="1">Chat</option><option value="1.4">Chat + Voice</option></select>
+        </label>
+        <div class="estimate card"><div class="muted">Szacunkowa cena</div><div id="estimateVal" class="price large">—</div><button id="calcBtn" class="btn">Oblicz</button></div>
+      </div>
+    </section>
+
+    <section id="faq" class="card">
+      <h3>FAQ</h3>
+      <details><summary>Jak długo trwa projekt?</summary><p>Od 3 do 21 dni, zależnie od zakresu.</p></details>
+      <details><summary>Jakie technologie używacie?</summary><p>OpenAI, LLMs, webhooki, Node.js, React (jeśli potrzebne), Docker, chmury.</p></details>
+    </section>
+
+    <section id="kontakt" class="card">
+      <h3>Kontakt</h3>
+      <form id="contactForm">
+        <input id="name" name="name" placeholder="Imię i nazwisko" required>
+        <input id="email" name="email" type="email" placeholder="E-mail" required>
+        <input id="company" name="company" placeholder="Firma (opcjonalnie)">
+        <textarea id="message" name="message" rows="6" placeholder="Opisz projekt" required></textarea>
+        <div class="form-row">
+          <button type="submit" class="btn">Wyślij zapytanie</button>
+          <div id="formStatus" class="muted"></div>
+        </div>
+      </form>
+    </section>
+
+    <section id="portfolio" class="card">
+      <h3>Przykładowe wdrożenia</h3>
+      <div class="grid">
+        <div class="case card">
+          <h4>Chatbot e‑commerce</h4><p>Automatyczne rekomendacje i cross-sell.</p>
+        </div>
+        <div class="case card">
+          <h4>Automatyzacja helpdesk</h4><p>Automatyczne tworzenie ticketów i routing.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>© 2025 AI Agents</div>
+    <div class="footer-links"><a href="/admin" target="_blank">Panel admina</a></div>
+  </footer>
+
+  <!-- Chat widget -->
+  <div id="chatLauncher" class="chat-launcher">Chat</div>
+  <div id="chatWidget" class="chat-widget hidden" aria-hidden="true">
+    <div class="chat-header">
+      <strong>AI Assistant</strong>
+      <button id="chatClose" class="btn small ghost">✕</button>
+    </div>
+    <div id="chatLog" class="chat-log"></div>
+    <div class="chat-controls">
+      <input id="chatInput" placeholder="Napisz wiadomość..." />
+      <button id="chatSend" class="btn">Wyślij</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
