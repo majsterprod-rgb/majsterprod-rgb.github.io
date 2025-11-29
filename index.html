@@ -325,6 +325,19 @@
     © 2025 AI Agents — All rights reserved
   </footer>
 
+  <!-- AI AGENT TEST SECTION -->
+  <section id="ai-agent" style="padding:80px 20px; max-width:900px; margin:0 auto; text-align:center;">
+    <h2>Try the AI Voice/Text Agent</h2>
+    <p style="margin-bottom:20px; color:#555; font-size:18px;">Chat with an AI Agent powered by GPT. Type your message below to start.</p>
+
+    <div id="chat-box" style="border:1px solid var(--border); border-radius:14px; padding:20px; height:320px; overflow-y:auto; text-align:left; background:#fafafa; margin-bottom:20px;"></div>
+
+    <div style="display:flex; gap:10px;">
+      <input id="userInput" type="text" placeholder="Type your message..." style="flex:1; padding:14px; border-radius:14px; border:1px solid var(--border); font-size:16px;" />
+      <button onclick="sendMessage()" class="btn btn-primary" style="padding:14px 24px;">Send</button>
+    </div>
+  </section>
+
   <!-- JS -->
   <script>
     function startDemo() {
@@ -342,7 +355,36 @@
     });("click", () => {
       document.body.classList.toggle("dark");
     });
-</script>
+  // SIMPLE GPT CHAT FRONTEND
+    function addMessage(sender, text) {
+      const box = document.getElementById('chat-box');
+      const bubble = document.createElement('div');
+      bubble.style.margin = '10px 0';
+      bubble.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      box.appendChild(bubble);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('userInput');
+      const message = input.value.trim();
+      if (!message) return;
+
+      addMessage('You', message);
+      input.value = '';
+
+      // === PLACEHOLDER FOR REAL GPT API ===
+      // Replace the fetch URL with your backend endpoint
+      addMessage('AI', 'Thinking...');
+
+      try {
+        const reply = "This is a placeholder response. Connect your GPT API to make it real.";
+
+        // Replace the placeholder message
+        const box = document.getElementById('chat-box');
+        box.lastChild.innerHTML = `<strong>AI:</strong> ${reply}`;
+      } catch (err) {
+        addMessage('AI', 'Error connecting to AI service.');
 
 </body>
 </html>
