@@ -1,0 +1,50 @@
+:root{
+  --bg:#f7f9fc; --card:#ffffff; --accent:#00a6ff; --text:#0b1724; --muted:#6b7280;
+  --radius:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+.container{max-width:1100px;margin:24px auto;padding:0 20px}
+.site-header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:linear-gradient(90deg,#0a0f24,#18254a);color:#fff}
+.logo{height:48px;margin-right:12px}
+.logo-wrap{display:flex;align-items:center;gap:12px}
+.site-header h1{margin:0;font-size:20px}
+.tag{opacity:0.9;margin:0}
+.header-actions{display:flex;gap:10px;align-items:center}
+.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.btn.ghost{background:transparent;border:2px solid rgba(255,255,255,0.12)}
+.btn.small{padding:6px 8px;font-size:13px}
+.card{background:var(--card);padding:20px;border-radius:var(--radius);box-shadow:0 8px 24px rgba(16,24,40,0.06);margin-bottom:18px}
+.hero{padding:48px 20px;text-align:center}
+.cta-row{display:flex;gap:12px;justify-content:center;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pricing{display:flex;gap:12px;justify-content:center}
+.price-card{padding:18px;border-radius:12px;text-align:center;border:1px solid #e6eef9}
+.price{font-weight:800;font-size:20px}
+.calc{display:grid;grid-template-columns:1fr 1fr 1fr 320px;gap:12px;align-items:start}
+.calc label{display:block}
+.estimate{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:16px}
+.price.large{font-size:22px}
+.muted{color:var(--muted)}
+.site-footer{background:#0a0f24;color:#fff;padding:18px;text-align:center}
+
+/* chat widget */
+.chat-launcher{position:fixed;right:20px;bottom:20px;background:var(--accent);color:#fff;padding:12px 14px;border-radius:999px;cursor:pointer;box-shadow:0 12px 30px rgba(8,14,30,0.24)}
+.chat-widget{position:fixed;right:20px;bottom:80px;width:360px;background:#fff;border-radius:12px;box-shadow:0 12px 40px rgba(8,14,30,0.25);display:flex;flex-direction:column;overflow:hidden}
+.chat-widget.hidden{display:none}
+.chat-header{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:#0a0f24;color:#fff}
+.chat-log{padding:12px;height:300px;overflow:auto;background:#f6f8fb}
+.chat-log .msg{margin-bottom:8px;padding:8px;border-radius:10px;max-width:80%}
+.chat-log .user{background:#d9f1ff;margin-left:auto}
+.chat-log .bot{background:#eef2ff}
+.chat-controls{display:flex;padding:10px;gap:8px;border-top:1px solid #eef2f6}
+.chat-controls input{flex:1;padding:8px;border-radius:8px;border:1px solid #d6dbe5}
+
+/* animations */
+@keyframes floatIn { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:none } }
+.card{animation:floatIn .36s ease}
+
+/* dark mode support */
+:root.dark{
+  --bg:#071024; --card:#081428; --accent:#1fb6ff; --text:#e6eef9; --muted:#9fb3c8;
+}
