@@ -1,351 +1,107 @@
 <!doctype html>
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Agents — AI Voice Agents</title>
-
+  <title>AI Agents — Premium AI Voice Agents</title>
   <style>
     :root {
       --bg: #ffffff;
       --text: #000000;
       --accent: #000000;
       --border: #dcdcdc;
-      --radius: 14px;
+      --radius: 16px;
     }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+    body { margin:0; padding:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--text);} 
 
     /* NAVBAR */
-    nav {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-    }
-
-    nav .logo {
-      font-size: 22px;
-      font-weight: bold;
-    }
-
-    nav .nav-links a {
-      margin-left: 24px;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-    }
+    nav { position:fixed; top:0; left:0; width:100%; padding:22px 48px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(14px); background:rgba(255,255,255,0.85); border-bottom:1px solid var(--border); z-index:1000; }
+    nav .logo { font-size:24px; font-weight:800; }
+    nav .nav-links a { margin-left:28px; text-decoration:none; color:var(--text); font-size:18px; font-weight:600; }
 
     /* HERO */
-    header {
-      padding-top: 150px;
-      padding-bottom: 120px;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-    }
+    .hero { padding-top:160px; padding-bottom:120px; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center; max-width:1100px; margin:0 auto; }
+    .hero h1 { font-size:64px; font-weight:900; line-height:1.08; margin-bottom:24px; }
+    .hero p { font-size:22px; max-width:700px; color:#444; margin-bottom:38px; }
+    .btn { padding:16px 34px; border-radius:var(--radius); border:2px solid var(--accent); font-size:18px; font-weight:bold; background:transparent; cursor:pointer; transition:0.2s; margin:8px; text-decoration:none; color:var(--text); }
+    .btn:hover { transform:translateY(-4px); }
+    .btn-primary { background:var(--accent); color:#fff; }
 
-    header h1 {
-      font-size: 58px;
-      line-height: 1.1;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
+    /* VIDEO */
+    .hero-video { width:100%; max-width:900px; border-radius:20px; margin-top:50px; box-shadow:0 0 40px rgba(0,0,0,0.25);} 
 
-    header p {
-      font-size: 22px;
-      color: #444;
-      margin-bottom: 40px;
-    }
-
-    .btn {
-      padding: 14px 30px;
-      border-radius: var(--radius);
-      border: 2px solid var(--accent);
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      background: transparent;
-      transition: 0.2s;
-      margin: 8px;
-      text-decoration: none;
-      color: var(--text);
-      display: inline-block;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-    }
-
-    /* FEATURES */
-    section {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 80px 20px;
-    }
-
-    section h2 {
-      font-size: 42px;
-      font-weight: 800;
-      margin-bottom: 40px;
-      text-align: center;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .card {
-      border: 1px solid var(--border);
-      padding: 32px;
-      border-radius: var(--radius);
-      transition: 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-    }
-
-    .card h3 {
-      font-size: 24px;
-      margin-bottom: 12px;
-    }
-
-    /* FAQ */
-    .faq-item {
-      margin-bottom: 16px;
-      border: 1px solid var(--border);
-      padding: 16px;
-      border-radius: var(--radius);
-    }
-
-    summary {
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+    /* CHAT SECTION */
+    #ai-agent { padding:100px 20px; max-width:900px; margin:0 auto; text-align:center; }
+    #chat-box { border:1px solid var(--border); border-radius:20px; padding:20px; height:350px; overflow-y:auto; background:#f5f5f5; margin-bottom:20px; }
+    .bubble { padding:14px 18px; max-width:80%; margin:12px 0; border-radius:18px; font-size:16px; line-height:1.4; }
+    .bubble.user { background:#000; color:#fff; margin-left:auto; border-bottom-right-radius:4px; }
+    .bubble.ai { background:#eaeaea; color:#000; margin-right:auto; border-bottom-left-radius:4px; }
 
     /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
-      margin-top: 60px;
-      font-size: 14px;
-      color: #666;
-    }
-    /* TICKER */
-    .ticker {
-      width: 100%;
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(90deg, #ffffff 0%, #f2f2f2 50%, #ffffff 100%);
-      margin-top: 10px;
-      position: relative;
-    }
+    footer { text-align:center; padding:50px 0; border-top:1px solid var(--border); margin-top:60px; font-size:14px; color:#777; }
 
-    .ticker::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.04), transparent 70%);
-      pointer-events: none;
-    }
-    }
-    .ticker-track {
-      white-space: nowrap;
-      display: inline-block;
-      padding: 20px 0;
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      background: linear-gradient(90deg, #000, #555, #000);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: tickerMove 18s linear infinite;
-    }
-    @keyframes tickerMove {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-  /* DARK MODE */
-    body.dark {
-      --bg: #000000;
-      --text: #ffffff;
-      --accent: #ffffff;
-      --border: #333333;
-      transition: background 0.3s, color 0.3s;
-    }
-
-</style>
+    /* DARK MODE */
+    body.dark { --bg:#000; --text:#fff; --accent:#fff; --border:#333; }
+  </style>
 </head>
-
 <body>
 
-  <!-- NAVBAR -->
-  <nav>
-    <div class="logo">AI Agents AI</div>
-    <div class="nav-links">
-      <a href="features.html">Features</a>
-      
-      <a href="faq.html">FAQ</a>
-    </div>
-  </nav>
-
-  <!-- COLOR MODE TOGGLE BUTTON -->
-  <button id="toggleMode" style="position: fixed; bottom: 20px; right: 20px; z-index: 2000; padding: 12px 20px; border-radius: 14px; border: 2px solid #000; background:#fff; cursor:pointer; font-weight:bold;">🌙</button>
-
-  <!-- TICKER MOVED UP -->
-  <div class="ticker">
-    <div class="ticker-track">
-      AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS •
-    </div>
+<nav>
+  <div class="logo">AI Agents</div>
+  <div class="nav-links">
+    <a href="features.html">Features</a>
+    <a href="faq.html">FAQ</a>
   </div>
+</nav>
 
-  <!-- HERO SECTION -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1>
-        Super‑realistic<br />
-        <span class="accent">AI Voice Agent</span>
-      </h1>
-      <p>
-        It answers, speaks, sells, and handles conversations in real time — more naturally than a human.
-      </p>
-      <div class="hero-buttons">
-        <a href="#demo" class="btn btn-primary">Try the demo</a>
-        <a href="#features" class="btn">See features</a>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <video class="hero-video" autoplay muted loop playsinline>
-        <source src="YOUR_VIDEO.mp4" type="video/mp4" />
-      </video>
-      <div class="floating-ball"></div>
-    </div>
-    </div>
-  </header>
-
-  <!-- FEATURES -->
-  
+<header class="hero">
+  <h1>Super‑realistic <br><span>AI Voice Agent</span></h1>
+  <p>It answers, speaks, sells, and handles conversations in real time — more naturally than a human.</p>
+  <div>
+    <a href="#ai-agent" class="btn btn-primary">Try the demo</a>
+    <a href="features.html" class="btn">See features</a>
   </div>
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="YOUR_VIDEO.mp4" type="video/mp4">
+  </video>
+</header>
 
-  
-
-  <!-- MOVING TICKER -->
-  <div class="ticker">
-    <div class="ticker-track">
-      AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS •
-    </div>
+<section id="ai-agent">
+  <h2>Test the AI Agent</h2>
+  <p>Chat with an AI Agent powered by GPT. Type your message below.</p>
+  <div id="chat-box"></div>
+  <div style="display:flex; gap:10px;">
+    <input id="userInput" type="text" placeholder="Type..." style="flex:1; padding:14px; border-radius:16px; border:1px solid var(--border);">
+    <button onclick="sendMessage()" class="btn btn-primary">Send</button>
   </div>
-  </div>
-
-  <!-- FAQ -->
-  
-
-  <!-- FOOTER -->
-  <footer>
-    © 2025 AI Agents — All rights reserved
-  
-<section id="test-chat">
-  <!-- AI chat widget placeholder -->
 </section>
+
+<footer>
+  © 2025 AI Agents — All rights reserved
 </footer>
 
-  <!-- AI AGENT TEST SECTION -->
-  <section id="ai-agent" style="padding:80px 20px; max-width:900px; margin:0 auto; text-align:center;">
-    <h2>Try the AI Voice/Text Agent</h2>
-    <p style="margin-bottom:20px; color:#555; font-size:18px;">Chat with an AI Agent powered by GPT. Type your message below to start.</p>
+<script>
+function addBubble(sender, text) {
+  const box = document.getElementById("chat-box");
+  const div = document.createElement("div");
+  div.className = sender === "You" ? "bubble user" : "bubble ai";
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
 
-    <div id="chat-box" style="border:1px solid var(--border); border-radius:14px; padding:20px; height:320px; overflow-y:auto; text-align:left; background:#fafafa; margin-bottom:20px;"></div>
-
-    <div style="display:flex; gap:10px;">
-      <input id="userInput" type="text" placeholder="Type your message..." style="flex:1; padding:14px; border-radius:14px; border:1px solid var(--border); font-size:16px;" />
-      <button onclick="sendMessage()" class="btn btn-primary" style="padding:14px 24px;">Send</button>
-    </div>
-  </section>
-
-  <!-- JS -->
-  <script>
-    function startDemo() {
-      const out = document.getElementById("demo-output");
-      out.innerHTML = "Ładowanie...";
-
-      setTimeout(() => {
-        out.innerHTML = "👋 Cześć! Jestem Twoim agentem AI. Jak mogę pomóc?";
-      }, 1200);
-    }
-    const btn=document.getElementById("toggleMode");
-    btn.addEventListener("click", () => {
-      const dark = document.body.classList.toggle("dark");
-      btn.textContent = dark ? "☀️" : "🌙";
-    });("click", () => {
-      document.body.classList.toggle("dark");
-    });
-  // SIMPLE GPT CHAT FRONTEND
-    function addMessage(sender, text) {
-      const box = document.getElementById('chat-box');
-      const bubble = document.createElement('div');
-      bubble.style.margin = '10px 0';
-      bubble.innerHTML = `<strong>${sender}:</strong> ${text}`;
-      box.appendChild(bubble);
-      box.scrollTop = box.scrollHeight;
-    }
-
-    async function sendMessage() {
-      const input = document.getElementById('userInput');
-      const message = input.value.trim();
-      if (!message) return;
-
-      addMessage('You', message);
-      input.value = '';
-
-      // === PLACEHOLDER FOR REAL GPT API ===
-      // Replace the fetch URL with your backend endpoint
-      addMessage('AI', 'Thinking...');
-
-      try {
-        const reply = "This is a placeholder response. Connect your GPT API to make it real.";
-
-        // Replace the placeholder message
-        const box = document.getElementById('chat-box');
-        box.lastChild.innerHTML = `<strong>AI:</strong> ${reply}`;
-      } catch (err) {
-        addMessage('AI', 'Error connecting to AI service.');
-      }
-    }
-
-  </script>
+async function sendMessage(){
+  const input=document.getElementById("userInput");
+  const msg=input.value.trim();
+  if(!msg)return;
+  addBubble("You",msg);
+  input.value="";
+  addBubble("AI","Thinking...");
+  setTimeout(()=>{
+    document.querySelectorAll('.bubble.ai').pop().textContent = "Connect backend to GPT API for real replies.";
+  },800);
+}
+</script>
 
 </body>
 </html>
