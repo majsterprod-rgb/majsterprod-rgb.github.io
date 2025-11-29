@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AI Agents — AI Assistants</title>
+  <title>MajsterProd — AI Voice Agents</title>
 
   <style>
     :root {
@@ -161,16 +161,38 @@
       font-size: 14px;
       color: #666;
     }
-  </style>
+    /* TICKER */
+    .ticker {
+      width: 100%;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      margin-top: 40px;
+    }
+    .ticker-track {
+      white-space: nowrap;
+      display: inline-block;
+      padding: 16px 0;
+      font-size: 28px;
+      font-weight: 700;
+      animation: tickerMove 18s linear infinite;
+    }
+    @keyframes tickerMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+</style>
 </head>
 
 <body>
 
   <!-- NAVBAR -->
   <nav>
-    <div class="logo">AI Agents</div>
+    <div class="logo">MajsterProd AI</div>
     <div class="nav-links">
-      <a href="#features">Functions</a>
+      <a href="#features">Funkcje</a>
       <a href="#demo">Demo</a>
       <a href="#faq">FAQ</a>
     </div>
@@ -229,14 +251,12 @@
     </div>
   </section>
 
-  <!-- DEMO SECTION -->
-  <section id="demo" style="text-align:center;">
-    <h2>Wypróbuj demo</h2>
-    <p>Kliknij, aby uruchomić przykładową interakcję AI.</p>
-    <button class="btn btn-primary" onclick="startDemo()">Uruchom demo</button>
-
-    <div id="demo-output" style="margin-top:30px; font-size:20px; font-weight:bold;"></div>
-  </section>
+  <!-- MOVING TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS • AI AGENTS — YOUR FULL-TIME TIME-SAVERS •
+    </div>
+  </div>
 
   <!-- FAQ -->
   <section id="faq">
