@@ -1,306 +1,265 @@
-<!--
-Black & White single-file HTML template
-Designed to imitate the clear, modern layout like getzowie.com but in monochrome.
-Drop this file as your repository's index.html (replace current) and push to GitHub Pages.
-Notes:
- - Uses system fonts for fast loading. Replace with Google Fonts if you want.
- - All colors are black/white/gray using CSS variables for easy tuning.
- - Mobile-first, responsive layout. Simple JS toggles mobile menu and smooth scroll.
- - Accessibility: focus styles, sufficient contrast, readable sizes.
--->
-
 <!doctype html>
 <html lang="pl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MajsterProd — Agenci AI</title>
-  <meta name="description" content="Profesjonalni agenci AI dla firm — prosty kontakt, przejrzyste ceny." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MajsterProd — AI Voice Agents</title>
 
-  <!-- Styles -->
   <style>
-    :root{
-      --bg: #ffffff; /* white */
-      --fg: #0a0a0a; /* near-black */
-      --muted: #777777; /* gray for secondary text */
-      --accent: #000000; /* primary CTA color (black) */
-      --card-border: #e6e6e6;
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --accent: #000000;
+      --border: #dcdcdc;
       --radius: 14px;
-      --maxwidth: 1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--fg);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      -webkit-tap-highlight-color: transparent;
     }
 
-    a{color:inherit;text-decoration:none}
-
-    .container{width:92%;max-width:var(--maxwidth);margin:0 auto}
-
-    /* Header */
-    header{padding:20px 0;}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{font-weight:700;letter-spacing:0.2px}
-    .nav-links{display:flex;gap:14px;align-items:center}
-    .nav-links a{padding:8px 12px;border-radius:10px}
-
-    /* Mobile menu */
-    .menu-btn{display:none;border:1px solid transparent;padding:8px;border-radius:10px;background:transparent}
-
-    /* Hero */
-    .hero{padding:36px 0 10px}
-    .hero-grid{display:grid;grid-template-columns:1fr;gap:26px;align-items:center}
-    .eyebrow{font-size:14px;color:var(--muted);font-weight:600}
-    h1{font-size:28px;margin:6px 0 12px;line-height:1.05}
-    p.lead{color:var(--muted);margin:0 0 16px}
-
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;border:2px solid var(--accent);cursor:pointer}
-    .btn-primary{background:var(--fg);color:var(--bg);}
-    .btn-ghost{background:transparent;color:var(--fg);}
-    .btn:focus{outline:3px solid rgba(0,0,0,0.08);outline-offset:2px}
-    .btn:hover{transform:translateY(-3px)}
-
-    /* Cards */
-    .features{display:grid;grid-template-columns:repeat(1,1fr);gap:14px;margin-top:22px}
-    .card{border:1px solid var(--card-border);padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));}
-    .card h3{margin:0 0 8px}
-    .muted{color:var(--muted)}
-
-    /* Pricing */
-    .pricing{display:grid;grid-template-columns:1fr;gap:12px;margin:28px 0}
-    .price-card{padding:18px;border-radius:12px;border:1px solid var(--card-border)}
-    .price{font-size:22px;font-weight:800}
-
-    /* Footer */
-    footer{padding:28px 0;color:var(--muted);font-size:14px}
-
-    /* Layout tweaks for larger screens */
-    @media(min-width:760px){
-      .hero-grid{grid-template-columns:1fr 460px}
-      h1{font-size:40px}
-      .features{grid-template-columns:repeat(2,1fr)}
-      .pricing{grid-template-columns:repeat(3,1fr)}
-      .menu-btn{display:none}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    /* Mobile nav adjustments */
-    @media(max-width:759px){
-      .nav-links{display:none}
-      .menu-btn{display:inline-flex}
-      .mobile-nav{display:none}
-      .mobile-nav.open{display:block;padding:12px 0}
-      .menu-btn:focus{outline:3px solid rgba(0,0,0,0.08);}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
     }
 
-    /* Small UI polish */
-    .kicker{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--card-border);font-weight:700}
-    .logo-mark{width:38px;height:38px;border-radius:8px;border:1px solid var(--card-border);display:inline-grid;place-items:center;font-weight:800}
+    /* NAVBAR */
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
 
+    nav .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav .nav-links a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* HERO */
+    header {
+      padding-top: 150px;
+      padding-bottom: 120px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 58px;
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    header p {
+      font-size: 22px;
+      color: #444;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      padding: 14px 30px;
+      border-radius: var(--radius);
+      border: 2px solid var(--accent);
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      background: transparent;
+      transition: 0.2s;
+      margin: 8px;
+      text-decoration: none;
+      color: var(--text);
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* FEATURES */
+    section {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    section h2 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      padding: 32px;
+      border-radius: var(--radius);
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    /* FAQ */
+    .faq-item {
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: var(--radius);
+    }
+
+    summary {
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+      font-size: 14px;
+      color: #666;
+    }
   </style>
 </head>
+
 <body>
 
-  <header class="container">
-    <nav class="nav" aria-label="Główna nawigacja">
-      <div style="display:flex;align-items:center;gap:14px">
-        <div class="logo-mark">MP</div>
-        <div class="brand">MajsterProd</div>
-      </div>
-
-      <div class="nav-links" role="navigation" aria-label="linki">
-        <a href="#features">Funkcje</a>
-        <a href="#pricing">Cennik</a>
-        <a href="#contact" class="btn btn-ghost">Kontakt</a>
-        <a href="#" class="btn btn-primary">Zamów</a>
-      </div>
-
-      <button class="menu-btn" id="menuToggle" aria-expanded="false" aria-controls="mobileNav">☰</button>
-    </nav>
-
-    <div id="mobileNav" class="mobile-nav" hidden>
-      <div style="display:flex;flex-direction:column;gap:8px;padding-top:8px">
-        <a href="#features">Funkcje</a>
-        <a href="#pricing">Cennik</a>
-        <a href="#contact">Kontakt</a>
-        <a href="#" class="btn btn-primary">Zamów</a>
-      </div>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="logo">MajsterProd AI</div>
+    <div class="nav-links">
+      <a href="#features">Funkcje</a>
+      <a href="#demo">Demo</a>
+      <a href="#faq">FAQ</a>
     </div>
+  </nav>
 
+  <!-- HERO SECTION -->
+  <header>
+    <h1>Agenci Głosowi AI, którzy pracują za Ciebie 24/7</h1>
+    <p>Odbierają telefony, odpowiadają na pytania, prowadzą klientów — naturalnie jak człowiek.</p>
+    <a href="#demo" class="btn btn-primary">Wypróbuj demo</a>
+    <a href="#features" class="btn">Zobacz funkcje</a>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="eyebrow">Profesjonalne rozwiązania</div>
-          <h1>Agenci AI dla biznesu — szybciej, taniej, prościej.</h1>
-          <p class="lead">Zintegrujemy inteligentne agenty, które usprawnią obsługę klienta i automatyzację procesów. Bez zbędnego komplikowania — my robimy technologię prostą w użyciu.</p>
+  <!-- FEATURES -->
+  <section id="features">
+    <h2>Kluczowe funkcje</h2>
 
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#contact">Umów demo</a>
-            <a class="btn btn-ghost" href="#pricing">Zobacz cennik</a>
-          </div>
-
-          <div class="features" id="features">
-            <div class="card">
-              <h3>Obsługa 24/7</h3>
-              <p class="muted">Natychmiastowe odpowiedzi i automatyczne eskalacje dla złożonych spraw.</p>
-            </div>
-            <div class="card">
-              <h3>Integracje</h3>
-              <p class="muted">Połączymy Twoje systemy: CRM, Slack, e‑mail, bazę wiedzy.</p>
-            </div>
-            <div class="card">
-              <h3>Bezpieczeństwo</h3>
-              <p class="muted">Dostępne role, logi i ochrona danych na poziomie biznesowym.</p>
-            </div>
-            <div class="card">
-              <h3>Rozwój</h3>
-              <p class="muted">Agenty uczą się kontekstu Twojej branży, poprawiając efektywność.</p>
-            </div>
-          </div>
-
-        </div>
-
-        <aside style="padding:18px;border-radius:12px;border:1px solid var(--card-border);height:100%;align-self:start">
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div>
-                <div class="kicker">Najpopularniejsze</div>
-                <div style="font-weight:800;font-size:18px;margin-top:8px">Start — 3 agenty</div>
-                <div class="muted">Zaczynasz z podstawowymi integracjami i supportem.</div>
-              </div>
-              <div style="text-align:right">
-                <div class="price">499 zł</div>
-                <div class="muted">/ miesiąc</div>
-              </div>
-            </div>
-
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <a href="#contact" class="btn btn-primary">Skontaktuj się</a>
-              <a href="#pricing" class="btn btn-ghost">Zobacz wszystkie</a>
-            </div>
-
-            <div style="border-top:1px solid var(--card-border);padding-top:10px">
-              <strong>Korzyści:</strong>
-              <ul style="margin:8px 0 0 18px;color:var(--muted)">
-                <li>Integracja 2 tygodnie</li>
-                <li>Wsparcie 24/7</li>
-                <li>Bezpieczne przechowywanie danych</li>
-              </ul>
-            </div>
-
-          </div>
-        </aside>
-
-      </div>
-    </section>
-
-    <section id="pricing" class="pricing">
-      <div class="price-card">
-        <h3>Start</h3>
-        <div class="price">499 zł</div>
-        <p class="muted">Do 3 agentów, podstawowe integracje.</p>
-        <div style="margin-top:12px"><a class="btn btn-primary" href="#contact">Wybierz</a></div>
+    <div class="grid">
+      <div class="card">
+        <h3>Naturalna rozmowa</h3>
+        <p>Agent AI mówi i rozumie jak człowiek — bez opóźnień.</p>
       </div>
 
-      <div class="price-card">
-        <h3>Biznes</h3>
-        <div class="price">1299 zł</div>
-        <p class="muted">Do 10 agentów, SLA, zaawansowane integracje.</p>
-        <div style="margin-top:12px"><a class="btn btn-primary" href="#contact">Wybierz</a></div>
+      <div class="card">
+        <h3>Obsługa połączeń</h3>
+        <p>Może odbierać telefony, odpowiadać i przełączać klientów.</p>
       </div>
 
-      <div class="price-card">
-        <h3>Enterprise</h3>
-        <div class="price">Oferta</div>
-        <p class="muted">Pełne wsparcie, dedykowany zespół, integracje na zamówienie.</p>
-        <div style="margin-top:12px"><a class="btn btn-primary" href="#contact">Kontakt</a></div>
+      <div class="card">
+        <h3>Integracje API</h3>
+        <p>Łączy się z Twoimi systemami i pobiera dane w locie.</p>
       </div>
-    </section>
 
-    <section id="contact" style="padding:18px 0 60px">
-      <div style="display:grid;grid-template-columns:1fr;gap:14px;align-items:start">
-        <div>
-          <h2>Kontakt</h2>
-          <p class="muted">Napisz do nas — odpowiadamy zwykle w ciągu 24 godzin.</p>
-
-          <form id="contactForm" style="display:flex;flex-direction:column;gap:10px;max-width:520px">
-            <input name="name" placeholder="Imię i nazwisko" required style="padding:12px;border-radius:10px;border:1px solid var(--card-border)" />
-            <input name="email" type="email" placeholder="Twój mail" required style="padding:12px;border-radius:10px;border:1px solid var(--card-border)" />
-            <textarea name="message" placeholder="Wiadomość" rows="5" required style="padding:12px;border-radius:10px;border:1px solid var(--card-border)"></textarea>
-            <div style="display:flex;gap:10px">
-              <button type="submit" class="btn btn-primary">Wyślij</button>
-              <button type="reset" class="btn btn-ghost">Wyczyść</button>
-            </div>
-            <div id="formMsg" aria-live="polite" style="color:var(--muted);font-size:14px"></div>
-          </form>
-
-        </div>
+      <div class="card">
+        <h3>Automatyczne odpowiedzi</h3>
+        <p>Natychmiastowe odpowiedzi oparte na Twojej bazie wiedzy.</p>
       </div>
-    </section>
-
-  </main>
-
-  <footer class="container">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
-      <div>© MajsterProd — wszystkie prawa zastrzeżone</div>
-      <div class="muted">Polityka prywatności · Regulamin</div>
     </div>
+  </section>
+
+  <!-- DEMO SECTION -->
+  <section id="demo" style="text-align:center;">
+    <h2>Wypróbuj demo</h2>
+    <p>Kliknij, aby uruchomić przykładową interakcję AI.</p>
+    <button class="btn btn-primary" onclick="startDemo()">Uruchom demo</button>
+
+    <div id="demo-output" style="margin-top:30px; font-size:20px; font-weight:bold;"></div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>FAQ</h2>
+
+    <div class="faq-item">
+      <details>
+        <summary>Jak działa agent AI?</summary>
+        <p>Analizuje Twoje dane i odpowiada w czasie rzeczywistym.</p>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Czy mogę podpiąć własny numer?</summary>
+        <p>Tak — pełna integracja z telefonią VoIP.</p>
+      </details>
+    </div>
+
+    <div class="faq-item">
+      <details>
+        <summary>Czy agent może prowadzić sprzedaż?</summary>
+        <p>Tak, może kwalifikować leady i przekierowywać klientów.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 MajsterProd — Wszelkie prawa zastrzeżone
   </footer>
 
+  <!-- JS -->
   <script>
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('menuToggle');
-    const mobileNav = document.getElementById('mobileNav');
-    if(menuBtn){
-      menuBtn.addEventListener('click', ()=>{
-        const open = mobileNav.classList.toggle('open');
-        mobileNav.hidden = !open;
-        menuBtn.setAttribute('aria-expanded', String(open));
-      })
-    }
+    function startDemo() {
+      const out = document.getElementById("demo-output");
+      out.innerHTML = "Ładowanie...";
 
-    // Smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const target = a.getAttribute('href');
-        if(target === '#') return;
-        const el = document.querySelector(target);
-        if(el){
-          e.preventDefault();
-          el.scrollIntoView({behavior:'smooth',block:'start'});
-          // close mobile nav if open
-          if(mobileNav && mobileNav.classList.contains('open')){
-            mobileNav.classList.remove('open');
-            mobileNav.hidden = true;
-            menuBtn.setAttribute('aria-expanded', 'false');
-          }
-        }
-      })
-    })
-
-    // Simple contact form handler (demo): sends data to the console and shows success message.
-    const form = document.getElementById('contactForm');
-    const formMsg = document.getElementById('formMsg');
-    if(form){
-      form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form));
-        // Replace this with your real endpoint (Zapier, Netlify Functions, Formspree, etc.)
-        console.log('Contact form submit:', data);
-        formMsg.textContent = 'Dziękujemy — wiadomość wysłana (demo).';
-        form.reset();
-      })
+      setTimeout(() => {
+        out.innerHTML = "👋 Cześć! Jestem Twoim agentem AI. Jak mogę pomóc?";
+      }, 1200);
     }
   </script>
 
