@@ -41,23 +41,32 @@ async function sendMessage() {
   addMessage("user", message);
   chatInput.value = "";
 
+  // tymczasowy tekst
   addMessage("bot", "⏳ Myślę…");
 
   try {
     const res = await fetch(API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message }),
+      headers: { 
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ message })
     });
 
     const data = await res.json();
 
+    // usuń "myślę..."
     chatLog.removeChild(chatLog.lastChild);
 
     addMessage("bot", data.reply || "Brak odpowiedzi.");
 
   } catch (error) {
     console.error(error);
+
+    // usuń "myślę..."
+    chatLog.removeChild(chatLog.lastChild);
+
     addMessage("bot", "❌ Błąd połączenia z AI.");
   }
 }
