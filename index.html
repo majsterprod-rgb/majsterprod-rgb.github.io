@@ -232,18 +232,36 @@ function addBubble(sender, text) {
   box.scrollTop = box.scrollHeight;
 }
 
-async function sendMessage(){
-  const input=document.getElementById("userInput");
-  const msg=input.value.trim();
-  if(!msg)return;
-  addBubble("You",msg);
-  input.value="";
-  addBubble("AI","Thinking...");
-  setTimeout(()=>{
-    document.querySelectorAll('.bubble.ai').pop().textContent = "Connect backend to GPT API for real replies.";
-  },800);
+// NEW GPT INTEGRATION
+async function sendMessage() {
+  const input = document.getElementById("userInput");
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  addBubble("You", msg);
+  input.value = "";
+
+  const thinkingBubble = document.createElement("div");
+  thinkingBubble.className = "bubble ai";
+  thinkingBubble.textContent = "Thinking...";
+  document.getElementById("chat-box").appendChild(thinkingBubble);
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: msg })
+    });
+
+    const data = await response.json();
+    thinkingBubble.textContent = data.reply || "Error: no reply received";
+
+  } catch (err) {
+    thinkingBubble.textContent = "Server error — GPT backend not connected yet.";
+  }
 }
 </script>
+
 
 </body>
 </html>
