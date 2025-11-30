@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   const { message } = req.body;
 
   try {
-    const reply = await fetch("https://api.openai.com/v1/chat/completions", {
+    const reply = await fetch("https://api.openai.com/v1/responses", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,12 +14,15 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
-        messages: [{ role: "user", content: message }],
+        input: message
       }),
     });
 
     const data = await reply.json();
-    const botMessage = data.choices?.[0]?.message?.content || "Brak odpowiedzi.";
+
+    // nowy format: output[0].content[0].text
+    const botMessage =
+      data.output?.[0]?.content?.[0]?.text || "Brak odpowiedzi.";
 
     res.status(200).json({ reply: botMessage });
   } catch (error) {
