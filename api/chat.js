@@ -20,9 +20,9 @@ export default async function handler(req, res) {
 
     const data = await reply.json();
 
-    // nowy format: output[0].content[0].text
     const botMessage =
-      data.output?.[0]?.content?.[0]?.text || "Brak odpowiedzi.";
+      data.output?.[0]?.content?.[0]?.text ||
+      "Brak odpowiedzi.";
 
     res.status(200).json({ reply: botMessage });
   } catch (error) {
