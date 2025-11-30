@@ -1,35 +1,35 @@
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import OpenAI from "openai";
 
 const app = express();
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
 
+// Wstaw swój klucz API:
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
 app.post("/api/chat", async (req, res) => {
-  const userMessage = req.body.message;
-
   try {
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: "You are an AI assistant." },
-        { role: "user", content: userMessage }
-      ]
+    const userMessage = req.body.message || "";
+
+    const completion = await client.responses.create({
+      model: "gpt-4.1-mini",
+      input: userMessage
     });
 
-    const reply = completion.choices[0].message.content;
-    res.json({ reply });
+    const reply = completion.output[0].content[0].text;
 
-  } catch (err) {
-    console.error(err);
-    res.json({ reply: "Backend error: " + err.message });
+    res.json({ reply });
+  } catch (error) {
+    console.error("Chat error:", error);
+    res.status(500).json({ reply: "Error: server failed." });
   }
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});
