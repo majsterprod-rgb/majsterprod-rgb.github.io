@@ -110,7 +110,7 @@
       text-shadow:0 0 10px rgba(255,255,255,0.4);
     }
 
-    /* GLASS CHAT BOX */
+    /* CHAT BOX */
     #chat-box {
       border:1px solid var(--border);
       border-radius:20px;
@@ -142,7 +142,6 @@
       box-shadow:0 0 12px rgba(0,0,0,0.2);
     }
 
-    /* FOOTER */
     footer {
       text-align:center; padding:50px 0;
       border-top:1px solid var(--border);
@@ -150,29 +149,71 @@
       backdrop-filter: blur(8px);
     }
 
-    /* DARK MODE */
-    body.dark {
-      --bg:#000; --text:#fff; --accent:#fff; --border:#444;
+    /* FLOATING CHAT BUTTON */
+    #chat-widget-button {
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      background: black;
+      color: white;
+      width: 64px;
+      height: 64px;
+      font-size: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      z-index: 2000;
     }
 
-    /* FADE-IN ANIMATIONS */
-    .fade-in {
-      opacity:0;
-      transform: translateY(30px);
-      animation: fadeInUp 1s forwards;
+    /* CHAT WIDGET POPUP */
+    #chat-widget-window {
+      position: fixed;
+      bottom: 110px;
+      right: 26px;
+      width: 340px;
+      height: 450px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0px 8px 30px rgba(0,0,0,0.4);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 3000;
     }
 
-    @keyframes fadeInUp {
-      0% { opacity:0; transform: translateY(30px); }
-      100% { opacity:1; transform: translateY(0); }
+    #chat-widget-header {
+      padding: 14px 18px;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.8);
+      color: white;
     }
 
-    .fade-delay-1 { animation-delay: 0.2s; }
-    .fade-delay-2 { animation-delay: 0.4s; }
-    .fade-delay-3 { animation-delay: 0.6s; }
+    #chat-widget-header span {
+      cursor: pointer;
+      font-size: 18px;
+    }
 
-  }
+    #chat-widget-inputs {
+      display: flex;
+      padding: 10px;
+      gap: 10px;
+    }
 
+    #chat-widget-inputs input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 14px;
+      border: 1px solid #777;
+    }
   </style>
 </head>
 <body>
@@ -200,29 +241,31 @@
 <section id="ai-agent">
   <h2>Test the AI Agent</h2>
   <p>Chat with an AI Agent powered by GPT. Type your message below.</p>
+</section>
+
+<!-- FLOATING CHAT WIDGET BUTTON -->
+<div id="chat-widget-button">💬</div>
+
+<!-- FLOATING CHAT WINDOW -->
+<div id="chat-widget-window">
+  <div id="chat-widget-header">
+    AI Assistant
+    <span id="chat-widget-close">✖</span>
+  </div>
+
   <div id="chat-box"></div>
-  <div style="display:flex; gap:10px;">
-    <input id="userInput" type="text" placeholder="Type..." style="flex:1; padding:14px; border-radius:16px; border:1px solid var(--border); backdrop-filter:blur(6px);">
+
+  <div id="chat-widget-inputs">
+    <input id="userInput" type="text" placeholder="Type..." />
     <button onclick="sendMessage()" class="btn btn-primary">Send</button>
   </div>
-</section>
+</div>
 
 <footer>
   © 2025 AI Agents — All rights reserved
 </footer>
 
 <script>
-// FADE-IN ON SCROLL
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('fade-in');
-    }
-  });
-}, { threshold: 0.2 });
-
-document.querySelectorAll('section, header').forEach(el => observer.observe(el));
-
 function addBubble(sender, text) {
   const box = document.getElementById("chat-box");
   const div = document.createElement("div");
@@ -232,7 +275,7 @@ function addBubble(sender, text) {
   box.scrollTop = box.scrollHeight;
 }
 
-// NEW GPT INTEGRATION
+// GPT INTEGRATION
 async function sendMessage() {
   const input = document.getElementById("userInput");
   const msg = input.value.trim();
@@ -257,11 +300,19 @@ async function sendMessage() {
     thinkingBubble.textContent = data.reply || "Error: no reply received";
 
   } catch (err) {
-    thinkingBubble.textContent = "Server error — GPT backend not connected yet.";
+    thinkingBubble.textContent = "Server error — backend not connected.";
   }
 }
-</script>
 
+// OPEN/CLOSE WIDGET
+document.getElementById("chat-widget-button").onclick = () => {
+  document.getElementById("chat-widget-window").style.display = "flex";
+};
+
+document.getElementById("chat-widget-close").onclick = () => {
+  document.getElementById("chat-widget-window").style.display = "none";
+};
+</script>
 
 </body>
 </html>
