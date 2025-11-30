@@ -15,35 +15,17 @@
       --accent: #000000;
       --border: #dcdcdc;
       --radius: 16px;
-      --glass: rgba(255,255,255,0.2);
-      --glass-dark: rgba(0,0,0,0.2);
     }
 
     body {
       margin:0; padding:0;
       font-family: Arial, Helvetica, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      transition: background 0.4s ease, color 0.4s ease;
+      background:#ffffff !important;
+      color:#000;
     }
 
-    /* ANIMATED GRADIENT BACKGROUND */
-    body::before {
-      content: "";
-      position: fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      background: linear-gradient(120deg,#fff,#000,#fff);
-      background-size: 300% 300%;
-      animation: gradientMove 12s ease infinite;
-      z-index:-2;
-    }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    /* 🔥 USUNIĘTE CIEMNE / ANIMOWANE TŁO */
+    body::before { display:none !important; }
 
     /* NAVBAR */
     nav {
@@ -51,13 +33,12 @@
       top:0; left:0; width:100%;
       padding:22px 48px;
       display:flex; justify-content:space-between; align-items:center;
-      backdrop-filter:blur(18px);
-      background:var(--glass);
+      background:#ffffff;
       border-bottom:1px solid var(--border);
       z-index:1000;
-      box-shadow:0 4px 24px rgba(0,0,0,0.15);
+      box-shadow:0 4px 24px rgba(0,0,0,0.1);
     }
-    nav .logo { font-size:24px; font-weight:800; text-shadow:0 0 6px rgba(255,255,255,0.4); }
+    nav .logo { font-size:24px; font-weight:800; }
     nav .nav-links a { margin-left:28px; text-decoration:none; color:var(--text); font-size:18px; font-weight:600; }
 
     /* HERO SECTION */
@@ -68,37 +49,30 @@
     }
     .hero h1 {
       font-size:64px; font-weight:900; line-height:1.08; margin-bottom:24px;
-      text-shadow:0 0 12px rgba(255,255,255,0.6);
-      animation: neonPulse 3s infinite alternate;
     }
 
-    @keyframes neonPulse {
-      from { text-shadow:0 0 10px rgba(255,255,255,0.4); }
-      to   { text-shadow:0 0 22px rgba(255,255,255,0.9); }
+    .hero p {
+      font-size:22px; max-width:700px; margin-bottom:38px; color:#000;
     }
-
-    .hero p { font-size:22px; max-width:700px; margin-bottom:38px; color:#222; }
 
     .btn {
       padding:16px 34px; border-radius:var(--radius);
       border:2px solid var(--accent);
       font-size:18px; font-weight:bold;
-      background:transparent; cursor:pointer;
+      background:#fff; cursor:pointer;
       transition:0.2s;
       margin:8px; text-decoration:none;
-      color:var(--text);
-      backdrop-filter:blur(8px);
+      color:#000;
     }
-    .btn:hover { transform:translateY(-4px); box-shadow:0 0 20px rgba(255,255,255,0.6); }
-    .btn-primary { background:var(--accent); color:#fff; }
+    .btn:hover { transform:translateY(-4px); box-shadow:0 2px 14px rgba(0,0,0,0.15); }
+    .btn-primary { background:#000; color:#fff; }
 
     /* HERO VIDEO */
     .hero-video {
       width:100%; max-width:900px;
       border-radius:20px;
       margin-top:50px;
-      box-shadow:0 0 40px rgba(0,0,0,0.25);
-      backdrop-filter:blur(20px);
+      box-shadow:0 0 20px rgba(0,0,0,0.15);
     }
 
     /* AI AGENT SECTION */
@@ -107,7 +81,6 @@
     }
     #ai-agent h2 {
       font-size:48px; font-weight:800;
-      text-shadow:0 0 10px rgba(255,255,255,0.4);
     }
 
     /* CHAT BOX */
@@ -116,37 +89,32 @@
       border-radius:20px;
       padding:20px;
       height:350px; overflow-y:auto;
-      background:var(--glass);
-      backdrop-filter: blur(18px);
+      background:#ffffff !important;
       margin-bottom:20px;
-      box-shadow:0 8px 30px rgba(0,0,0,0.3);
+      box-shadow:0 4px 20px rgba(0,0,0,0.1);
     }
 
     .bubble {
       padding:14px 18px; max-width:80%; margin:12px 0;
       border-radius:18px; font-size:16px; line-height:1.4;
-      backdrop-filter:blur(12px);
     }
     .bubble.user {
-      background:rgba(0,0,0,0.85);
+      background:#000;
       color:#fff;
       margin-left:auto;
       border-bottom-right-radius:4px;
-      box-shadow:0 0 12px rgba(255,255,255,0.4);
     }
     .bubble.ai {
-      background:rgba(255,255,255,0.7);
+      background:#f1f1f1;
       color:#000;
       margin-right:auto;
       border-bottom-left-radius:4px;
-      box-shadow:0 0 12px rgba(0,0,0,0.2);
     }
 
     footer {
       text-align:center; padding:50px 0;
       border-top:1px solid var(--border);
       margin-top:60px; font-size:14px; color:#444;
-      backdrop-filter: blur(8px);
     }
 
     /* FLOATING CHAT BUTTON */
@@ -164,7 +132,7 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
       z-index: 2000;
     }
 
@@ -175,44 +143,39 @@
       right: 26px;
       width: 340px;
       height: 450px;
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(20px);
+      background:#ffffff !important;
       border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.3);
-      box-shadow: 0px 8px 30px rgba(0,0,0,0.4);
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 3000;
+      border:1px solid var(--border);
+      box-shadow: 0px 8px 30px rgba(0,0,0,0.15);
+      display:none;
+      flex-direction:column;
+      overflow:hidden;
+      z-index:3000;
     }
 
     #chat-widget-header {
       padding: 14px 18px;
       font-size: 18px;
       font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0,0,0,0.8);
-      color: white;
-    }
-
-    #chat-widget-header span {
-      cursor: pointer;
-      font-size: 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:#000;
+      color:white;
     }
 
     #chat-widget-inputs {
-      display: flex;
-      padding: 10px;
-      gap: 10px;
+      display:flex;
+      padding:10px;
+      gap:10px;
+      background:#fff;
     }
 
     #chat-widget-inputs input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 14px;
-      border: 1px solid #777;
+      flex:1;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid #ccc;
     }
   </style>
 </head>
@@ -243,10 +206,10 @@
   <p>Chat with an AI Agent powered by GPT. Type your message below.</p>
 </section>
 
-<!-- FLOATING CHAT WIDGET BUTTON -->
+<!-- CHAT FLOAT BUTTON -->
 <div id="chat-widget-button">💬</div>
 
-<!-- FLOATING CHAT WINDOW -->
+<!-- CHAT WINDOW -->
 <div id="chat-widget-window">
   <div id="chat-widget-header">
     AI Assistant
