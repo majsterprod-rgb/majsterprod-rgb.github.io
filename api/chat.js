@@ -1,16 +1,12 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(400).json({ error: "Only POST allowed" });
+    return res.status(405).json({ error: "Only POST allowed" });
   }
 
   const { message } = req.body;
 
-  if (!message) {
-    return res.status(400).json({ error: "No message provided" });
-  }
-
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const reply = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,19 +14,14 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: "You are an AI assistant on a website." },
-          { role: "user", content: message },
-        ],
+        messages: [{ role: "user", content: message }],
       }),
     });
 
-    const data = await response.json();
-    const reply =
-      data?.choices?.[0]?.message?.content ||
-      "Sorry, I couldn't generate a response.";
+    const data = await reply.json();
+    const botMessage = data.choices?.[0]?.message?.content || "Brak odpowiedzi.";
 
-    res.status(200).json({ reply });
+    res.status(200).json({ reply: botMessage });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
