@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI Agents — Premium AI Voice Agents</title>
 
-  <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Inter:wght@300;400;600;800&family=Montserrat:wght@300;400;600;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -20,14 +19,12 @@
     body {
       margin:0; padding:0;
       font-family: Arial, Helvetica, sans-serif;
-      background:#ffffff !important;
+      background:#ffffff;
       color:#000;
     }
 
-    /* 🔥 USUNIĘTE CIEMNE / ANIMOWANE TŁO */
     body::before { display:none !important; }
 
-    /* NAVBAR */
     nav {
       position:fixed;
       top:0; left:0; width:100%;
@@ -39,9 +36,11 @@
       box-shadow:0 4px 24px rgba(0,0,0,0.1);
     }
     nav .logo { font-size:24px; font-weight:800; }
-    nav .nav-links a { margin-left:28px; text-decoration:none; color:var(--text); font-size:18px; font-weight:600; }
+    nav .nav-links a {
+      margin-left:28px; text-decoration:none; color:var(--text);
+      font-size:18px; font-weight:600;
+    }
 
-    /* HERO SECTION */
     .hero {
       padding-top:160px; padding-bottom:120px;
       display:flex; flex-direction:column; justify-content:center; align-items:center;
@@ -67,7 +66,6 @@
     .btn:hover { transform:translateY(-4px); box-shadow:0 2px 14px rgba(0,0,0,0.15); }
     .btn-primary { background:#000; color:#fff; }
 
-    /* HERO VIDEO */
     .hero-video {
       width:100%; max-width:900px;
       border-radius:20px;
@@ -75,21 +73,22 @@
       box-shadow:0 0 20px rgba(0,0,0,0.15);
     }
 
-    /* AI AGENT SECTION */
+    /* FIXED — no unwanted big white space */
     #ai-agent {
-      padding:100px 20px; max-width:900px; margin:0 auto; text-align:center;
-    }
-    #ai-agent h2 {
-      font-size:48px; font-weight:800;
+      padding:20px 20px;
+      max-width:900px;
+      margin:40px auto 0 auto;
+      text-align:center;
     }
 
-    /* CHAT BOX */
+    #ai-agent h2 { font-size:48px; font-weight:800; }
+
     #chat-box {
       border:1px solid var(--border);
       border-radius:20px;
       padding:20px;
       height:350px; overflow-y:auto;
-      background:#ffffff !important;
+      background:#ffffff;
       margin-bottom:20px;
       box-shadow:0 4px 20px rgba(0,0,0,0.1);
     }
@@ -99,14 +98,12 @@
       border-radius:18px; font-size:16px; line-height:1.4;
     }
     .bubble.user {
-      background:#000;
-      color:#fff;
+      background:#000; color:#fff;
       margin-left:auto;
       border-bottom-right-radius:4px;
     }
     .bubble.ai {
-      background:#f1f1f1;
-      color:#000;
+      background:#f1f1f1; color:#000;
       margin-right:auto;
       border-bottom-left-radius:4px;
     }
@@ -117,7 +114,6 @@
       margin-top:60px; font-size:14px; color:#444;
     }
 
-    /* FLOATING CHAT BUTTON */
     #chat-widget-button {
       position: fixed;
       bottom: 26px;
@@ -136,14 +132,13 @@
       z-index: 2000;
     }
 
-    /* CHAT WIDGET POPUP */
     #chat-widget-window {
       position: fixed;
       bottom: 110px;
       right: 26px;
       width: 340px;
       height: 450px;
-      background:#ffffff !important;
+      background:#ffffff;
       border-radius: 20px;
       border:1px solid var(--border);
       box-shadow: 0px 8px 30px rgba(0,0,0,0.15);
@@ -193,7 +188,7 @@
   <h1>Super-realistic <br><span>AI Voice Agent</span></h1>
   <p>It answers, speaks, sells, and handles conversations in real time — more naturally than a human.</p>
   <div>
-    <a href="#ai-agent" class="btn btn-primary">Try the demo</a>
+    <a href="#ai-agent" class="btn btn-primary" id="demoBtn">Try the demo</a>
     <a href="features.html" class="btn">See features</a>
   </div>
   <video class="hero-video" autoplay muted loop playsinline>
@@ -206,10 +201,8 @@
   <p>Chat with an AI Agent powered by GPT. Type your message below.</p>
 </section>
 
-<!-- CHAT FLOAT BUTTON -->
 <div id="chat-widget-button">💬</div>
 
-<!-- CHAT WINDOW -->
 <div id="chat-widget-window">
   <div id="chat-widget-header">
     AI Assistant
@@ -238,7 +231,6 @@ function addBubble(sender, text) {
   box.scrollTop = box.scrollHeight;
 }
 
-// GPT INTEGRATION
 async function sendMessage() {
   const input = document.getElementById("userInput");
   const msg = input.value.trim();
@@ -267,13 +259,22 @@ async function sendMessage() {
   }
 }
 
-// OPEN/CLOSE WIDGET
+// Open/close floating chat widget
+
 document.getElementById("chat-widget-button").onclick = () => {
   document.getElementById("chat-widget-window").style.display = "flex";
 };
 
 document.getElementById("chat-widget-close").onclick = () => {
   document.getElementById("chat-widget-window").style.display = "none";
+};
+
+// "Try the demo" now opens the chat immediately
+
+document.getElementById("demoBtn").onclick = (e) => {
+  e.preventDefault();
+  document.getElementById("chat-widget-window").style.display = "flex";
+  document.getElementById("chat-widget-window").scrollIntoView({ behavior: "smooth" });
 };
 </script>
 
