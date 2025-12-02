@@ -1,0 +1,27 @@
+// api/test.js
+export default async function handler(req, res) {
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "Only GET allowed" });
+  }
+
+  try {
+    const hasKey = !!process.env.OPENAI_API_KEY;
+
+    // zwracamy tylko informację czy klucz jest ustawiony i krótki maskowany prefix (jeśli chcesz)
+    let masked = null;
+    if (hasKey) {
+      const key = process.env.OPENAI_API_KEY;
+      // pokaż tylko 4 pierwsze znaki + **** (ale nie rób tego jeśli klucz sensitive jest ukryty)
+      masked = key.length > 8 ? `${key.slice(0,4)}****${key.slice(-4)}` : "****";
+    }
+
+    console.log("API test: OPENAI_API_KEY present:", hasKey);
+    return res.status(200).json({
+      openai_key_present: hasKey,
+      masked_example: masked
+    });
+  } catch (err) {
+    console.error("Test handler error:", err);
+    return res.status(500).json({ error: "Server error" });
+  }
+}
