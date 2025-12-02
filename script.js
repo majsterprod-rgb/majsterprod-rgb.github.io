@@ -47,7 +47,7 @@ async function sendMessage() {
   try {
     const res = await fetch(API_URL, {
       method: "POST",
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
