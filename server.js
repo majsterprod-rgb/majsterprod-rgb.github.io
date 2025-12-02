@@ -6,11 +6,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Wstaw swój klucz API:
+// OpenAI client
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+// API endpoint
 app.post("/api/chat", async (req, res) => {
   try {
     const userMessage = req.body.message || "";
@@ -29,7 +30,5 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
-});
+// ❗ ZAMIAST app.listen — EXPORTUJEMY!!
+export default app;
